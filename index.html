@@ -29,6 +29,10 @@
 
         .slide.active {
             display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
         }
 
         .slide:nth-child(1) {
@@ -77,6 +81,66 @@
             color: white;
             font-size: 1rem;
         }
+        .list-container {
+            margin-top: 2rem;
+            width: 80%;
+            max-width: 600px;
+        }
+
+        .list-item {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .list-item:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .list-header {
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: bold;
+        }
+
+        .arrow {
+            transition: transform 0.3s ease;
+            display: inline-block;
+        }
+
+        .list-item.active .arrow {
+            transform: rotate(90deg);
+        }
+
+        .list-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            padding: 0 1rem;
+            opacity: 0;
+        }
+
+        .list-item.active .list-content {
+            max-height: 200px;
+            padding: 0 1rem 1rem 1rem;
+            opacity: 1;
+            transition: max-height 0.3s ease, padding 0.3s ease, opacity 0.3s ease 0.1s;
+        }
+
+        .list-content p {
+            margin: 0;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: rgba(255, 255, 255, 0.9);
+        }
     </style>
 </head>
 <body>
@@ -85,6 +149,35 @@
     </div>
     <div class="slide">
         <p>this is example of presentation in github io</p>
+        <div class="list-container">
+            <div class="list-item" onclick="toggleContent(this)">
+                <div class="list-header">
+                    <span class="arrow">▶</span>
+                    <span>First point</span>
+                </div>
+                <div class="list-content">
+                    <p>Хомякам</p>
+                </div>
+            </div>
+            <div class="list-item" onclick="toggleContent(this)">
+                <div class="list-header">
+                    <span class="arrow">▶</span>
+                    <span>Second point</span>
+                </div>
+                <div class="list-content">
+                    <p>Пора</p>
+                </div>
+            </div>
+            <div class="list-item" onclick="toggleContent(this)">
+                <div class="list-header">
+                    <span class="arrow">▶</span>
+                    <span>Third point</span>
+                </div>
+                <div class="list-content">
+                    <p>Спать</p>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="slide">
         <p>Thats new added slide</p>
@@ -118,6 +211,10 @@
         function prevSlide() {
             currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
             showSlide(currentSlide);
+        }
+
+        function toggleContent(element) {
+            element.classList.toggle('active');
         }
 
         document.addEventListener('keydown', (e) => {
