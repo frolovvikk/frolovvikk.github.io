@@ -141,6 +141,67 @@
             line-height: 1.5;
             color: rgba(255, 255, 255, 0.9);
         }
+
+        .content-wrapper {
+            display: flex;
+            gap: 3rem;
+            align-items: flex-start;
+            margin-top: 2rem;
+        }
+
+        .table-container, .bullet-list {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        .table-container h3, .bullet-list h3 {
+            margin: 0 0 1rem 0;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            color: white;
+        }
+
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        th {
+            background: rgba(255, 255, 255, 0.1);
+            font-weight: bold;
+        }
+
+        tr:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .bullet-list ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .bullet-list li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: white;
+            font-size: 1.1rem;
+        }
+
+        .bullet-list li:before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: rgba(255, 255, 255, 0.7);
+        }
     </style>
 </head>
 <body>
@@ -181,6 +242,47 @@
     </div>
     <div class="slide">
         <p>Thats new added slide</p>
+        <div class="content-wrapper">
+            <div class="table-container">
+                <h3>Sample Table</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Score</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Alice</td>
+                            <td>95</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                        <tr>
+                            <td>Bob</td>
+                            <td>87</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                        <tr>
+                            <td>Charlie</td>
+                            <td>78</td>
+                            <td>✅ Pass</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="bullet-list">
+                <h3>Some list</h3>
+                <ul>
+                    <li>Bob</li>
+                    <li>Alice</li>
+                    <li>Charlie</li>
+                    <li>Zulu</li>
+                    <li>42</li>
+                </ul>
+            </div>
+        </div>
     </div>
 
     <div class="slide-indicator">
