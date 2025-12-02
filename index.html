@@ -202,6 +202,17 @@
             left: 0;
             color: rgba(255, 255, 255, 0.7);
         }
+
+        .controls button:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .controls button:disabled:hover {
+            background: rgba(255, 255, 255, 0.05);
+            transform: none;
+        }
     </style>
 </head>
 <body>
@@ -303,16 +314,32 @@
             slides.forEach(slide => slide.classList.remove('active'));
             slides[index].classList.add('active');
             document.getElementById('currentSlide').textContent = index + 1;
+            updateButtonStates();
+        }
+
+        function updateButtonStates() {
+            const prevButton = document.querySelector('.controls button:first-child');
+            const nextButton = document.querySelector('.controls button:last-child');
+            
+            // Отключаем кнопку Previous на первом слайде
+            prevButton.disabled = currentSlide === 0;
+            
+            // Отключаем кнопку Next на последнем слайде
+            nextButton.disabled = currentSlide === totalSlides - 1;
         }
 
         function nextSlide() {
-            currentSlide = (currentSlide + 1) % totalSlides;
-            showSlide(currentSlide);
+            if (currentSlide < totalSlides - 1) {
+                currentSlide++;
+                showSlide(currentSlide);
+            }
         }
 
         function prevSlide() {
-            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-            showSlide(currentSlide);
+            if (currentSlide > 0) {
+                currentSlide--;
+                showSlide(currentSlide);
+            }
         }
 
         function toggleContent(element) {
@@ -320,12 +347,13 @@
         }
 
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowRight' || e.key === ' ') {
-                nextSlide();
-            } else if (e.key === 'ArrowLeft') {
-                prevSlide();
-            }
+            if (e.key === 'ArrowRight') nextSlide();
+            else if (e.key === 'ArrowLeft') prevSlide();
         });
+
+        // Инициализация
+        document.getElementById('totalSlides').textContent = totalSlides;
+        showSlide(0);
     </script>
 </body>
 </html>
